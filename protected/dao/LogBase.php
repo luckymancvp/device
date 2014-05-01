@@ -6,6 +6,7 @@
  * The followings are the available columns in table 'log':
  * @property integer $id
  * @property integer $device_id
+ * @property string $user_input
  * @property string $user_name
  * @property string $user_div
  * @property string $other
@@ -45,11 +46,12 @@ abstract class LogBase extends CActiveRecord
 		return array(
 			array('device_id, create_time', 'required'),
 			array('device_id', 'numerical', 'integerOnly'=>true),
+			array('user_input', 'length', 'max'=>2555),
 			array('user_name, user_div, other', 'length', 'max'=>45),
 			array('update_time', 'safe'),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('id, device_id, user_name, user_div, other, create_time, update_time', 'safe', 'on'=>'search'),
+			array('id, device_id, user_input, user_name, user_div, other, create_time, update_time', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -73,6 +75,7 @@ abstract class LogBase extends CActiveRecord
 		return array(
 			'id' => 'ID',
 			'device_id' => 'Device',
+			'user_input' => 'User Input',
 			'user_name' => 'User Name',
 			'user_div' => 'User Div',
 			'other' => 'Other',
@@ -94,6 +97,7 @@ abstract class LogBase extends CActiveRecord
 
 		$criteria->compare('id',$this->id);
 		$criteria->compare('device_id',$this->device_id);
+		$criteria->compare('user_input',$this->user_input,true);
 		$criteria->compare('user_name',$this->user_name,true);
 		$criteria->compare('user_div',$this->user_div,true);
 		$criteria->compare('other',$this->other,true);

@@ -16,6 +16,8 @@ class Log extends LogBase
     {
         $criteria = new CDbCriteria();
         $criteria->limit = $count;
+        $criteria->order = "create_time DESC";
+        
         if ($time)
             $criteria->addCondition("create_time >= '$time'");
 
@@ -23,7 +25,7 @@ class Log extends LogBase
         $res  = array();
         foreach ($logs as $log) {
             $item  = $log->attributes;
-            $item["device_info"] = $log->device->info;
+            $item["device_id"] = $log->device->info;
             $res[] = $item;
         }
         return $res;
