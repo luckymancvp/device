@@ -30,7 +30,7 @@ class RecordController extends Controller
             "error" => array(),
         );
         if (!$log->save())
-            $res["error"] = $log->errors;
+            $res["error"] = $device->errors;
 
         echo CJSON::encode($res);
 	}

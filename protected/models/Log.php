@@ -19,6 +19,13 @@ class Log extends LogBase
         if ($time)
             $criteria->addCondition("create_time >= '$time'");
 
-        return Log::model()->findAll($criteria);
+        $logs = Log::model()->findAll($criteria);
+        $res  = array();
+        foreach ($logs as $log) {
+            $item  = $log->attributes;
+            $item["device_info"] = $log->device->info;
+            $res[] = $item;
+        }
+        return $res;
     }
 }

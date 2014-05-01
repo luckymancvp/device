@@ -41,7 +41,7 @@ abstract class DeviceBase extends CActiveRecord
 		// will receive user inputs.
 		return array(
 			array('info, create_time', 'required'),
-			array('info', 'length', 'max'=>45),
+			array('info', 'length', 'max'=>255),
 			array('update_time', 'safe'),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
