@@ -35,4 +35,19 @@ class RecordController extends Controller
 
         echo CJSON::encode($res);
 	}
+
+    public function actionDelete()
+    {
+        $device = Device::getDevice(Yii::app()->request->getParam("device_id", "DEFAULT DEVICE"));
+        $logs   = Log::model()->findAllByAttributes(array("device_id"=>$device->id));
+        foreach ($logs as $log)
+            $log->delete();
+
+        $res = array(
+            "result_code" => 1,
+            "error" => array(),
+        );
+
+        echo CJSON::encode($res);
+    }
 }
