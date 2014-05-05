@@ -21,8 +21,8 @@ class RecordController extends Controller
         $log->user_div    = Yii::app()->request->getParam("user_div" , "DEFAULT DIVISION");
         $log->user_input  = Yii::app()->request->getParam("user_input", "DEFAULT USER INPUT");
         $log->user_name   = Yii::app()->request->getParam("user_name", "DEFAULT USERNAME");
-        $log->create_time = new CDbExpression("NOW()");
-
+        $log->create_time = date("Y-m-d H:i:s");
+        
         $device = Device::getDevice(Yii::app()->request->getParam("device_id", "DEFAULT DEVICE"));
         $log->device_id   = $device->id;
 

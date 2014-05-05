@@ -16,18 +16,28 @@ class Log extends LogBase
     {
         $criteria = new CDbCriteria();
         $criteria->limit = $count;
-        $criteria->order = "create_time DESC";
+        $criteria->order = "create_time ASC";
         
         if ($time)
-            $criteria->addCondition("create_time >= '$time'");
+            $criteria->addCondition("create_time > $time");
 
         $logs = Log::model()->findAll($criteria);
         $res  = array();
         foreach ($logs as $log) {
             $item  = $log->attributes;
             $item["device_id"] = $log->device->info;
-            $res[] = $item;
+            $res[$log->device_id] = $item;
         }
-        return $res;
+
+        $return = array();
+        foreach ($res as $item)
+            $return[] = $item;
+
+        usort($return, array(Log::model(), "cmp"));
+        return $return;
+    }
+
+    public function cmp($a, $b){
+        return $a["create_time"] > $b["create_time"] ? -1 : 1;
     }
 }
