@@ -40,8 +40,12 @@ class RecordController extends Controller
     {
         $device = Device::getDevice(Yii::app()->request->getParam("device_id", "DEFAULT DEVICE"));
         $logs   = Log::model()->findAllByAttributes(array("device_id"=>$device->id));
-        foreach ($logs as $log)
-            $log->delete();
+        if ($logs){
+            /** @var Log $log */
+            $log    = $logs[count($logs) -1 ];
+            $log->return_time = date("Y-m-d H:i:s");
+            $log->save();
+        }
 
         $res = array(
             "result_code" => 1,

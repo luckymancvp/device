@@ -12,6 +12,7 @@
  * @property string $other
  * @property string $create_time
  * @property string $update_time
+ * @property string $return_time
  *
  * The followings are the available model relations:
  * @property Device $device
@@ -48,10 +49,10 @@ abstract class LogBase extends CActiveRecord
 			array('device_id', 'numerical', 'integerOnly'=>true),
 			array('user_input', 'length', 'max'=>2555),
 			array('user_name, user_div, other', 'length', 'max'=>45),
-			array('update_time', 'safe'),
+			array('update_time, return_time', 'safe'),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('id, device_id, user_input, user_name, user_div, other, create_time, update_time', 'safe', 'on'=>'search'),
+			array('id, device_id, user_input, user_name, user_div, other, create_time, update_time, return_time', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -81,6 +82,7 @@ abstract class LogBase extends CActiveRecord
 			'other' => 'Other',
 			'create_time' => 'Create Time',
 			'update_time' => 'Update Time',
+			'return_time' => 'Return Time',
 		);
 	}
 
@@ -103,6 +105,7 @@ abstract class LogBase extends CActiveRecord
 		$criteria->compare('other',$this->other,true);
 		$criteria->compare('create_time',$this->create_time,true);
 		$criteria->compare('update_time',$this->update_time,true);
+		$criteria->compare('return_time',$this->return_time,true);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,

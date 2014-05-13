@@ -17,7 +17,7 @@ class Log extends LogBase
         $criteria = new CDbCriteria();
         $criteria->limit = $count;
         $criteria->order = "create_time ASC";
-        
+
         if ($time)
             $criteria->addCondition("create_time > $time");
 
