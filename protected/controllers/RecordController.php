@@ -8,6 +8,8 @@ class RecordController extends Controller
         $time  = Yii::app()->request->getParam("time");
 
         $logs = Log::getData($count, $time);
+
+        header('Content-type: application/json');
         echo CJSON::encode(array(
             "records" => $logs,
             "result_code" => 1,
@@ -33,6 +35,7 @@ class RecordController extends Controller
         if (!$log->save())
             $res["error"] = $device->errors;
 
+        header('Content-type: application/json');
         echo CJSON::encode($res);
 	}
 
@@ -52,6 +55,7 @@ class RecordController extends Controller
             "error" => array(),
         );
 
+        header('Content-type: application/json');
         echo CJSON::encode($res);
     }
 }

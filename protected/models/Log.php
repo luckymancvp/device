@@ -15,7 +15,6 @@ class Log extends LogBase
     public static function getData($count, $time)
     {
         $criteria = new CDbCriteria();
-        $criteria->limit = $count;
         $criteria->order = "create_time ASC";
 
         if ($time)
